@@ -88,7 +88,7 @@ def searching_twitter?
 end
 
 def inspected_tweets?
-  @inspected
+  @inspected || csv_file_exists?
 end
 
 def csv_file_exists?
