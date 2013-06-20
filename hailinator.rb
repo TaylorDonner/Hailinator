@@ -10,15 +10,25 @@ Twitter.configure do |config|
 end
 
 
-search = Twitter.search("hail")
+search = Twitter.search("makersquare")
 
 
 CSV.open("hailinator.csv", "wb") do |csv|
+	
 	csv << ["handle", "text", "url"]
-	search.results.each do |result|
-		result.from_user
-		result.full_text
-		result.urls
-		csv << ["#{result.from_user}", "#{result.full_text}", "#{result.urls.to_s}"]
+	search.results.map do |result|
+		# result.from_user
+		# result.full_text
+		# result.id
+		
+		csv << ["#{result.from_user}", "#{result.full_text}", "https://twitter.com/#{result.from_user}/status/#{result.id}"]
+	Twitter.favorite(result.id)	
+	sleep 1
+	
 	end
 end
+
+
+
+
+
